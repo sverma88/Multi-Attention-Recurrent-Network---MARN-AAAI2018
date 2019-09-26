@@ -1,0 +1,3 @@
+Implemetation for MARN AAAI18
+
+Main file is MARN.py
