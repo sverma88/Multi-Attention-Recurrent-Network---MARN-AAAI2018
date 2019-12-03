@@ -20,6 +20,13 @@ class LSTHM(nn.Module):
         self.W=nn.Linear(in_size,4*self.cell_size)
         self.U=nn.Linear(cell_size,4*self.cell_size)
         self.V=nn.Linear(hybrid_in_size,4*self.cell_size)
+	
+	# modify the bias of forget gate to 1, and other gate to 0
+        self.b = torch.cat([torch.ones((cell_size,)), torch.zeros((3*cell_size,))])
+        self.W.bias.data.copy_(self.b)
+        self.U.bias.data.copy_(self.b)
+        self.V.bias.data.copy_(self.b)
+
         
     def __call__(self, x, ctm1, htm1, ztm1):
         return self.forward(x,ctm1,htm1,ztm1)
@@ -92,17 +99,6 @@ class MultipleAttentionFusion(nn.Module):
 		z=torch.cat(dim_reduced,dim=1)
 		return z,out_modalities
 
-class Zto1(nn.Module):
-    def __init__(self,in_size,hidden_size):
-        super(Zto1, self).__init__()
-        self.n1=nn.Linear(in_size,hidden_size)
-        self.n2=nn.Linear(hidden_size,1)
-
-
-    def forward(self, input):
-        y1=torch.relu(self.n1(input))
-        y2=self.n2(y1)
-        return y2
 
 
 class Map_pred(nn.Module):
