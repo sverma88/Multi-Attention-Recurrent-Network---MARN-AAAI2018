@@ -7,5 +7,5 @@ MARN is written in pytorch with some code fragments (1. LSTM Hybrid and 2. Multi
   - For reasons of my convenience data is required to be `data_dir = ../../data` -- errors might pop-up when other directories are used.
   - The model can be executed by running MARN.py. 
 
-Please contact either Sunny Verma at firstname.lastname@uts.edu.au for reporting bug fixes or suggestions.
+Please contact Sunny Verma at firstname.lastname@uts.edu.au for reporting bug fixes or suggestions.
 
